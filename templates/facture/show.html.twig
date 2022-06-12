@@ -1,0 +1,49 @@
+{% extends 'backbooking.html.twig' %}
+
+{% block title %}Facture{% endblock %}
+
+{% block body %}
+    <h1>Facture</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ facture.id }}</td>
+            </tr>
+            
+            <tr>
+                <th>Id programme</th>
+                <td>{{ facture.idExp }}</td>
+            </tr>
+            <tr> 
+                <th>Prix equipement </th>
+                <td>{{ facture.PrixEquip }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ facture.type }}</td>
+            </tr>
+            <tr>
+                <th>Prix sejour</th>
+                <td>{{ facture.PrixSejour }}</td>
+            </tr>
+            <tr>
+                <th>Prix Programmes</th>
+                <td>{{ facture.prixExp }}</td>
+            </tr>
+            <tr>
+                <th>Prix Final</th>
+                <td>{{ facture.prixFinal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('facture_index') }}">Retour</a>
+
+    <a href="{{ path('facture_edit', {'id': facture.id}) }}">Modifier</a>
+
+    {{ include('facture/_delete_form.html.twig') }}
+{% endblock %}
+
+

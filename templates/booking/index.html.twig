@@ -1,0 +1,83 @@
+{% extends 'back-officenewprog.html.twig' %}
+
+{% block title %}Index de reservation{% endblock %}
+
+{% block body %}
+   
+<th>Tri selon le prix : </th>
+    <a href="{{path('TrierParActbooking') }}">Tri croissant</a>
+    <a href="{{path('TrierParActAscbooking') }}">Tri décroissant</a>
+
+
+<div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Recherche par nom">
+    <a  href="{{ path('searchAct') }}"><i class="fa fa-sort"></i></a>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        var currentRequest = null;
+        $("#search").keyup(function(e){
+            var value = $(this).val();
+            if(currentRequest != null) {
+                currentRequest.abort();
+            }
+            currentRequest = $.ajax({
+                url : "{{ path('searchAct') }}",
+                type : 'GET',
+                data: {
+                    'searchValue' : value
+                },
+                success : function(retour)
+                {
+
+                    $('#all').html(retour);
+                },
+            });
+            return false;
+        });
+    });
+</script>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                
+                <th>Date d'arrivee</th>
+                <th>Date de depart</th>
+                <th>Duree de sejour</th>
+                
+                <th>Nombre d'adulte</th>
+                <th>Nombre d'enfants</th>
+                <th>Remarques</th>
+                <th>Prix Total</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in booking %}
+            <tr>
+                <td>{{ booking.id }}</td>
+               
+                <td>{{ booking.dateArrivee ? booking.dateArrivee|date('Y-m-d') : '' }}</td>
+                <td>{{ booking.dateDepart ? booking.dateDepart|date('Y-m-d') : '' }}</td>
+                <td>{{ booking.dureeSejour }}</td>
+              
+                <td>{{ booking.nbrAdulte }}</td>
+                <td>{{ booking.nbEnfants }}</td>
+                <td>{{ booking.remarques }}</td>
+                <td>{{ booking.PrixTotal }}</td>
+                <td>
+                    <a href="{{ path('booking_show', {'id': booking.id}) }}">Consulter</a>
+                    <a href="{{ path('booking_edit', {'id': booking.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">aucune reservation</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('booking_new') }}">Ajouter</a>
+{% endblock %}

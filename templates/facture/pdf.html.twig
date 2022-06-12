@@ -1,0 +1,38 @@
+
+
+
+
+<h1>Facture </h1>
+
+<table class="table">
+    <tbody>
+        <h2> Nous Voulons vous informer Mr. Foulen Ben Foulen (à importer du user) que votre facture detaillée est la suivante </h2>
+    
+ {% for facture in facture %}
+    
+ 
+        
+         
+         <tr> 
+            <th>Frais d'equipement </th>
+            <td>{{ facture.PrixEquip }}</td>
+        </tr>
+       
+            <th>Frais sejour</th>
+            <td>{{ facture.PrixSejour }}</td>
+        </tr>
+        <tr>
+            <th>Frais total Programmes</th>
+            <td>{{ facture.prixExp }}</td>
+        </tr>
+        <tr>
+            <th>Prix Final</th>
+            <td>{{ facture.prixFinal }}</td>
+        </tr>
+      
+       
+        {% endfor %}
+    </tbody>
+</table>
+
+

@@ -1,0 +1,11 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}New Reservations{% endblock %}
+
+{% block body %}
+    <h1> Reservations</h1>
+
+    {{ include('reservations/_form.html.twig') }}
+
+    <a href="{{ path('reservations_index') }}">Retour</a>
+{% endblock %}

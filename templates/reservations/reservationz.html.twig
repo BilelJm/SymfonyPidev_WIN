@@ -1,0 +1,103 @@
+
+{% extends 'base-frontlist.html.twig' %}
+
+{% block title %}Offers{% endblock %}
+
+
+
+
+{% block body %}
+
+
+
+
+
+
+
+
+
+	<div class="offers">
+
+
+		<!-- Offers -->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-1 temp_col"></div>
+				<div class="col-lg-11">
+
+					<!-- Offers Sorting -->
+					<div class="offers_sorting_container">
+						<ul class="offers_sorting">
+							<li>
+								<span class="sorting_text">Prix</span>
+								<i class="fa fa-chevron-down"></i>
+								<ul>
+									<li class="sort_btn" data-isotope-option='{ "sortBy": "original-order" }' data-parent=".price_sorting"><span>Voir Tout</span></li>
+									<li class="sort_btn" data-isotope-option='{ "sortBy": "price" }' data-parent=".price_sorting"><span>Assendant</span></li>
+								</ul>
+							</li><li>
+								<span class="sorting_text">Emplacement</span>
+								<i class="fa fa-chevron-down"></i>
+								<ul>
+									<li class="sort_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Par defaut</span></li>
+									<li class="sort_btn" data-isotope-option='{ "sortBy": "name" }'><span>Alphabet</span></li>
+								</ul>
+							</li>
+							<li>
+								<span class="sorting_text">Rating</span>
+								<i class="fa fa-chevron-down"></i>
+								<ul>
+									<li class="filter_btn" data-filter="*"><span>Voir tout</span></li>
+									<li class="sort_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Assendant</span></li>
+									<li class="filter_btn" data-filter=".rating_3"><span>3</span></li>
+									<li class="filter_btn" data-filter=".rating_4"><span>4</span></li>
+									<li class="filter_btn" data-filter=".rating_5"><span>5</span></li>
+								</ul>
+							</li>
+							
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+				<div class="col-lg-12">
+					<!-- Offers Grid -->
+
+					<div class="offers_grid">
+
+						<!-- Offers Item -->
+						{% for reservations in reservations %}
+
+						<div class="offers_item rating_4">
+							<div class="row">
+								<div class="col-lg-1 temp_col"></div>
+								<div class="col-lg-3 col-1680-4">
+									
+								</div>
+								<div class="col-lg-8">
+									<div class="offers_content">
+										
+										
+										
+										<div class="button book_button"><a href="{{ ('reservations_new') }}">Reserver<span></span><span></span><span></span></a></div>
+										<div class="offer_reviews">
+											<div class="offer_reviews_content">
+												<div class="offer_reviews_title">very good</div>
+												<div class="offer_reviews_subtitle">100 reviews</div>
+											</div>
+											<div class="offer_reviews_rating text-center">8.1</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+	</div>
+
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% extends 'back-officeprogramme.html.twig' %}
+
+{% block title %}stat{% endblock %}
+
+{% block stylessheets %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />{% endblock %}
+{% block body %}
+    <div class="table-light">
+        <br>
+
+    <h1 class="text-facebook" align="center">Répartition des catégories</h1>
+        <br> <br>
+          <canvas id="categories" width="400" height="200"></canvas>
+<br> <br>
+            <h1 class="text-facebook" align="center">Répartition des Regions</h1>
+            <br> <br>
+            <canvas id="regions" width="400" height="200"></canvas>
+
+
+        <br> <br> <br>
+
+
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+            integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+    let categories = document.querySelector("#categories")
+    let categGraph = new Chart(categories,{
+        type: "doughnut",
+        data:{
+            labels:{{ catNom|raw }},
+            datasets: [{
+
+                data: {{ catcount|raw }},
+                backgroundColor:{{ catcolor|raw }}
+
+
+        }],
+            options:{
+                scales:{
+                    y:{
+                        beginAtZero:"true"
+                    }
+                }}
+
+
+    }
+    })
+
+
+    let regions = document.querySelector("#regions")
+    let regGraph = new Chart(regions,{
+        type: "bar",
+        data:{
+            labels:{{ regNom|raw }},
+            datasets: [{
+                label: "Répartition des programmes selon les région",
+                data: {{ regcount|raw }},
+                backgroundColor:{{ regcolor|raw }}
+
+
+            }]
+
+        }
+    })
+
+
+
+
+
+</script>
+{% endblock %}

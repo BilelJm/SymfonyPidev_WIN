@@ -1,0 +1,52 @@
+{% extends 'backbooking.html.twig' %}
+
+{% block title %}Reservations{% endblock %}
+
+{% block body %}
+    <h1>Reservations</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ booking.id }}</td>
+            </tr>
+           
+            <tr>
+                <th>Date d'arrivee</th>
+                <td>{{ booking.dateArrivee ? booking.dateArrivee|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date de depart</th>
+                <td>{{ booking.dateDepart ? booking.dateDepart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duree de sejour</th>
+                <td>{{ booking.dureeSejour }}</td>
+            </tr>
+           
+            <tr>
+                <th>Nombre d'adultes</th>
+                <td>{{ booking.nbrAdulte }}</td>
+            </tr>
+            <tr>
+                <th>Nombre d'enfants</th>
+                <td>{{ booking.nbEnfants }}</td>
+            </tr>
+            <tr>
+                <th>Remarques</th>
+                <td>{{ booking.remarques }}</td>
+            </tr>
+            <tr>
+                <th>Prix total</th>
+                <td>{{ booking.PrixTotal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('booking_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('booking_edit', {'id': booking.id}) }}">edit</a>
+
+    {{ include('booking/_delete_form.html.twig') }}
+{% endblock %}

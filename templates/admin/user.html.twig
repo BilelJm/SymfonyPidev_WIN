@@ -1,0 +1,65 @@
+{% extends 'back-officenewprog.html.twig' %}
+
+{% block title %} Utilisateurs {% endblock %}
+
+{% block body %}
+
+    <table class="table  table-dark ">
+        <thead>
+        <tr>
+            <th scope="col">Surnom</th>
+            <th >Email</th>
+            <th>Prénom</th>
+            <th >Nom</th>
+            <th >Téléphone</th>
+            <th >Photo de <profile></profile></th>
+            <th >Role</th>
+            <th>Acttion</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for user in users %}
+            {% if user.email != app.user.email %}
+                <tr>
+
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.Tel }}</td>
+                    <td>{% if user.getPicture()!=null %}
+
+                            <img class="avatar img-circle img-thumbnail" src="{{ asset('/uploads/'~app.user.getPicture() ) }}"alt="Profile Pic"/>
+                        {% endif %}
+
+                        {% if user.getPicture()==null %}
+
+                            <img class="avatar img-circle img-thumbnail w-100" src="{{ asset('/uploads/avatar.png') }}" alt="Profile Pic"/>
+                        {% endif %}
+</td>
+                    <td scope="row"> {% for role in user.roles %}
+                            {{ role }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            <a href="{{ path('updateuser',{'id':user.id}) }}"> Modifier </a>
+                        </button>
+
+
+                        <button type="button" class="btn btn-danger" >
+                            <a href="{{ path('deleteUser',{'id':user.id}) }}">Supprimer</a>
+                        </button>
+                    </td>
+
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: md5
+            encode_as_base64: false
+            iterations: 0
+            #algorithm: bcrypt
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+
+
+    providers:
+        users_in_memory: { memory: null }
+        user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            pattern: ^/admin
+            anonymous: true
+            provider: users_in_memory
+            guard:
+                authenticators:
+                    - App\Security\AdminAuthAuthenticator
+            logout:
+                path: aplogout
+                # where to redirect after logout
+                target: aplogin
+            access_denied_url: /login
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+
+        main:
+            anonymous: lazy
+            provider: users_in_memory
+
+            guard:
+                authenticators:
+                    - App\Security\UserAuthAuthenticator
+                    - App\Security\GithubAuthenticator
+                entry_point: App\Security\UserAuthAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: prog
+            access_denied_url: /login
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

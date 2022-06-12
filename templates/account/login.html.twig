@@ -1,0 +1,86 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <title>Win Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
+
+</head>
+<body class="img js-fullheight" style="background-image: url({{ asset('admin/images/bg.jpg') }});">
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
+                    <h3 class="mb-4 text-center">Connexion d'administration</h3>
+
+
+                    {% block title %}{% endblock %}
+
+                    {% block body %}
+                        <form method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                </div>
+                            {% endif %}
+
+
+                            <label for="inputEmail">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                            <label for="inputPassword">Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+
+
+
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" name="_remember_me"> Remember me
+                                </label>
+                            </div>
+
+
+                            <div class="form-group mt-3">
+                                <button class="form-control btn btn-primary submit px-3" type="submit">
+                                    Connexion
+                                </button>
+                            </div>
+                        </form>
+                    {% endblock %}
+
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/js/popper.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin/js/main.j') }}s"></script>
+
+</body>
+</html>
+
+

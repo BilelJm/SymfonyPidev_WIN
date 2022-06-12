@@ -1,0 +1,38 @@
+{% extends 'back-officeprogramme.html.twig' %}
+
+{% block title %}calendrier{% endblock %}
+
+
+{% block body %}
+
+    <div  data-color="red" class="table-info" id="Calendrier"></div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+
+        window.onload=() => {
+            let calenderElt= document.querySelector("#Calendrier")
+
+            let  calendar= new FullCalendar.Calendar(calenderElt, {
+                initialView:'dayGridMonth',
+                locale: 'fr',
+                timeZone: 'Europe/Paris',
+                themeSystem: 'bootstrap5',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center:'title',
+                    end: 'dayGridMonth, timeGridWeek'
+                },
+
+                events: {{ data|raw }}
+            })
+
+            calendar.render()
+        }
+
+
+
+
+    </script>
+
+{% endblock %}
